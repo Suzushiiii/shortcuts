@@ -44,7 +44,7 @@ class ClickMause(threading.Thread):
                 t = time.localtime()
                 cur = time.strftime('%I:%M:%S %p', t)
 
-                print("Moving mouse to pos: ", randx, randy, cur)
+                print("Moving mouse to pos: {} {} // {}".format(randx, randy, cur))
 
                 mouse.position = (randx, randy, t)
                 time.sleep(self.delay)
