@@ -55,6 +55,7 @@ def remove_shortcut_text():
     for i in range(2):
         kbd.press(Key.backspace)
         kbd.release(Key.backspace)
+    kbd.release('q')
 
 def press_buttons(c):
     kbd.press(c)
