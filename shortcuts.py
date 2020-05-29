@@ -50,12 +50,17 @@ print('')
 for k, v in tip_text.items():
     print(tip.format(k.replace("", " ")[1:-1], shorten_tip(v)))
 
+list_of = []
+for k, v in tip_text.items():
+    list_of.extend([k[0],k[-1]])
+list_of = list(set(list_of))
 
 def remove_shortcut_text():
     for i in range(2):
         kbd.press(Key.backspace)
         kbd.release(Key.backspace)
-    kbd.release('q')
+    for k in list_of:
+        kbd.release(k)
 
 def press_buttons(c):
     kbd.press(c)
