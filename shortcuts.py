@@ -1,5 +1,7 @@
-﻿import time
+﻿import ctypes
+import time
 import re
+from ctypes import wintypes
 from pynput import keyboard
 from pynput.keyboard import Key, Controller, Listener
 
@@ -20,6 +22,7 @@ def shorten_tip(message):
 
 kbd = Controller()
 t = 0.02
+t_minimize = 1
 tip = 'Use {} to type "{}"'
 s1 = "q+`"
 s2 = "q+;"
@@ -27,6 +30,7 @@ s3 = "q+'"
 s4 = "q+/"
 s5 = "q+1"
 s6 = "q+2"
+s7 = "q+3"
 sExit = "<Shift>+<Esc>"
 ch = {"<": " ", ">": " "}
 sExit_fixed = fix_string(sExit, **ch)
@@ -37,8 +41,10 @@ t3 = "Wersja 1-0 (nieaktualna)."
 t4 = "Cześć, timsheetami, godzinami pracy, nadgodzinami, zajmuje się kontroling, napisz na controlling@pkfpolska.pl."
 t5 = "Zaakceptuj mi logowanie, za chwilę."
 t6 = "link do połączenia."
+t7_placeholder = "Dostaliśmy proces odebrania uprawnień dla {}, podczas nadawanie uprawniień została również ustawiona data ich odebrania.\
+Proces generuje się automatycznie.\r\nCzy mam zablokować konto z dniem {}?"
 
-tip_text = {s1: t1, s2: t2, s3: t3, s4: t4, s5: t5, s6: t6}
+tip_text = {s1: t1, s2: t2, s3: t3, s4: t4, s5: t5, s6: t6, s7: t7_placeholder}
 
 print('')
 print('Welcome')
@@ -98,6 +104,18 @@ def link_g2a():
     for c in t6:
         press_buttons(c)
 
+def odebranie_up():
+    remove_shortcut_text()
+    worker_name = input("Wprowadź nazwę Pracownika:")
+    due_date = input("Wprowadź datę wyłączena konta:")
+    t7 = t7_placeholder.format(worker_name, due_date)
+    user32 = ctypes.windll.user32
+    h_wnd = user32.GetForegroundWindow()
+    user32.ShowWindow(h_wnd, 6)
+    time.sleep(t_minimize)
+    for c in t7:
+        press_buttons(c)
+
 def stop_script():
     h.stop()
 
@@ -109,5 +127,6 @@ with keyboard.GlobalHotKeys({
         s4: ts_control,
         s5: g2a,
         s6: link_g2a,
+        s7: odebranie_up,
         sExit: stop_script}) as h:
     h.join()
