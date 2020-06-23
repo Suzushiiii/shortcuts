@@ -37,7 +37,6 @@ class ClickMause(threading.Thread):
     def run(self):
         while self.program_running:
             while self.running:
-
                 randx = randrange(680, 1416)
                 randy = randrange(325, 803)
 

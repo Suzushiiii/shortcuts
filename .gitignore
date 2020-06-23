@@ -2,3 +2,6 @@
 .vscode
 #files
 tesp.py
+test.py
+test*
+*.pyw
