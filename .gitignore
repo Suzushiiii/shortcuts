@@ -5,3 +5,6 @@ tesp.py
 test.py
 test*
 *.pyw
+*.ico
+systray.py
+*.pyc
