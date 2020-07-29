@@ -8,3 +8,4 @@ test*
 *.ico
 systray.py
 *.pyc
+clickLam.py

@@ -30,7 +30,7 @@ class ShortCuts:
         self.t1 = "Wersja 1-2 (aktualna), Brak błędów."
         self.t2 = "Wersja 1-2 (aktualna), W sprawozdaniu są następujące błędy:"
         self.t3 = "Wersja 1-0 (nieaktualna)."
-        self.t4 = "Cześć, timsheetami, godzinami pracy, nadgodzinami, zajmuje się kontroling, napisz na controlling@pkfpolska.pl."
+        self.t4 = "Cześć, timsheetami, godzinami pracy, nadgodzinami, zajmuje się kontroling, napisz na controling@pkfpolska.pl."
         self.t5 = "Zaakceptuj mi logowanie, za chwilę."
         self.t6 = "link do połączenia."
         self.t7_placeholder = "Dostaliśmy proces odebrania uprawnień dla {}, podczas nadawania uprawnień została również ustawiona data ich odebrania. \
