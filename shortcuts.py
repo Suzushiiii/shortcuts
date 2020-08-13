@@ -9,8 +9,8 @@ from pynput.keyboard import Key, Controller, Listener
 class ShortCuts:
     def __init__(self):
         super(ShortCuts, self).__init__()
-        title = "Background Shortcuts"
-        os.system('title ' + title)
+        self.title = "Background Shortcuts"
+        os.system('title ' + self.title)
         os.system('color 30')
         self.kbd = Controller()
         self.t = 0.02
@@ -55,7 +55,8 @@ Proces generuje się automatycznie.\rCzy mam zablokować konto z dniem {}?"
 
     def minimize(self):
         user32 = ctypes.windll.user32
-        h_wnd = user32.GetForegroundWindow()
+        #h_wnd = user32.GetForegroundWindow()
+        h_wnd = user32.FindWindowW(None, self.title)
         user32.ShowWindow(h_wnd, 6)
 
     def fix_string(self, s, **changes):
@@ -131,6 +132,7 @@ Proces generuje się automatycznie.\rCzy mam zablokować konto z dniem {}?"
 
 if __name__ == "__main__":
     sc = ShortCuts()
+    time.sleep(0.05)
     sc.minimize()
     with keyboard.GlobalHotKeys({
             sc.s1: sc.activate_12_good,

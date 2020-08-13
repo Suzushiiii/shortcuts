@@ -46,6 +46,8 @@ class ClickMause(threading.Thread):
                 print("Moving mouse to pos: {} {} // {}".format(randx, randy, cur))
 
                 mouse.position = (randx, randy, t)
+                keyboard.press(Key.ctrl)
+                keyboard.release(Key.ctrl)
                 time.sleep(self.delay)
                     # mouse.position = (2015, 241)
                     # mouse.click(self.button)
