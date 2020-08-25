@@ -31,9 +31,7 @@ class ClickMause(threading.Thread):
 
         percents = round(100.0 * count / float(total), 1)
         bar = '=' * filled_len + '-' * (bar_len - filled_len)
-
-        sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status)),
-        sys.stdout.flush()
+        print('[{}] {}{} ...{}\r'.format(bar, percents, '%', status), end='', flush=True),
     
     def start_clicking(self):
         self.running = True
