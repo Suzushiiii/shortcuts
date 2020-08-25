@@ -1,5 +1,6 @@
 import time
 import threading
+import sys
 from random import randrange
 from pynput.mouse import Button
 from pynput.mouse import Controller as MauseControler
@@ -23,6 +24,16 @@ class ClickMause(threading.Thread):
         self.key_enter = key_enter
         self.running = False
         self.program_running = True
+
+    def progress(self, count, total, status=''):
+        bar_len = 60
+        filled_len = int(round(bar_len * count / float(total)))
+
+        percents = round(100.0 * count / float(total), 1)
+        bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+        sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status)),
+        sys.stdout.flush()
     
     def start_clicking(self):
         self.running = True
@@ -48,7 +59,16 @@ class ClickMause(threading.Thread):
                 mouse.position = (randx, randy, t)
                 keyboard.press(Key.ctrl)
                 keyboard.release(Key.ctrl)
-                time.sleep(self.delay)
+                t = time.localtime()
+                
+                total = 20
+                i = 0
+                while i < total:  
+                    i += 0.25
+                    self.progress(i, total, status='To next move')
+                    time.sleep(0.25)
+                print('\n')
+                #time.sleep(self.delay)
                     # mouse.position = (2015, 241)
                     # mouse.click(self.button)
                     # time.sleep(self.delay)
@@ -109,7 +129,7 @@ def on_press(key):
                 click_thread.start_clicking()
 
         elif key == exit_key:
-            print("Stoping mouse :D")
+            print("\nStoping mouse :D")
             click_thread.exit()
             listener.stop()
 
